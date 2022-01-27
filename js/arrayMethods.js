@@ -5,6 +5,16 @@
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function map(array, callback) {
+ 
+    let newArr = array.reduce(function(prev, curr, index, arr){
+      
+      prev.push(callback(curr, index, arr));
+
+      return prev;
+
+    },[])
+
+  return newArr;
 
 }
 
@@ -16,6 +26,17 @@ function map(array, callback) {
 */
 function filter(array, callback) {
 
+  let newArr = array.reduce(function (prev, curr, index, arr) {
+
+    if (callback(curr, index, arr) === true) {
+      prev.push(curr)
+    } 
+    return prev
+
+  },[])
+
+  return newArr;
+
 }
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
@@ -26,6 +47,19 @@ function filter(array, callback) {
 */
 function some(array, callback) {
 
+
+  let result = array.reduce(function(prev, curr, index, array){
+    
+    if(callback(curr,index,array) === true){
+      return true
+    }
+
+    return prev
+
+  },false)
+
+  return result;
+
 }
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
@@ -35,6 +69,18 @@ function some(array, callback) {
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function every(array, callback) {
+
+  let result = array.reduce(function(prev,curr,index,array){
+
+    if(callback(curr,index,array) === false) {
+      return false
+    }
+
+    return prev
+
+  },true)
+
+  return result;
 
 }
 
